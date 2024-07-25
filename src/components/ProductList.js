@@ -48,11 +48,11 @@ const ProductList = () => {
             ))}
           </div>
           {/* Paginação */}
-          <div className="flex justify-center mt-4">
+          <div className="flex flex-wrap justify-center mt-4 gap-2">
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className="px-4 py-2 mx-1 bg-gray-300 text-black rounded-lg disabled:opacity-50"
+              className="px-4 py-2 bg-gray-300 text-black rounded-lg disabled:opacity-50 hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500"
             >
               Anterior
             </button>
@@ -60,7 +60,7 @@ const ProductList = () => {
               <button
                 key={index}
                 onClick={() => handlePageChange(index + 1)}
-                className={`px-4 py-2 mx-1 rounded-lg ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-300 text-black'}`}
+                className={`px-4 py-2 rounded-lg ${currentPage === index + 1 ? 'bg-blue-500 text-white' : 'bg-gray-300 text-black'} hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500`}
               >
                 {index + 1}
               </button>
@@ -68,7 +68,7 @@ const ProductList = () => {
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="px-4 py-2 mx-1 bg-gray-300 text-black rounded-lg disabled:opacity-50"
+              className="px-4 py-2 bg-gray-300 text-black rounded-lg disabled:opacity-50 hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500"
             >
               Próxima
             </button>
