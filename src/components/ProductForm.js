@@ -1,56 +1,73 @@
 // src/components/ProductForm.js
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import api from '../services/api';
 
-const ProductForm = ({ onSubmit }) => {
-  const { register, handleSubmit } = useForm();
+const ProductForm = () => {
+  const { register, handleSubmit, reset } = useForm();
+
+  const onSubmit = async (data) => {
+    try {
+      await api.createProduct(data); // Supondo que você tenha um método createProduct na sua API
+      reset();
+    } catch (error) {
+      console.error('Error creating product:', error);
+    }
+  };
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-4xl font-bold mb-4">Adicione um novo produto</h1>
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4 bg-white shadow-md rounded-lg p-4">
+      <h1 className="text-2xl font-bold mb-4">Adicionar produto</h1>
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
         <div>
-          <label className="block text-gray-700">Título</label>
+          <label className="block text-sm font-medium">Título</label>
           <input
-            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             {...register('title', { required: true })}
+            type="text"
+            className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
           />
         </div>
         <div>
-          <label className="block text-gray-700">Descrição</label>
-          <textarea
-            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
-            {...register('description', { required: true })}
-          />
-        </div>
-        <div>
-          <label className="block text-gray-700">Preço</label>
+          <label className="block text-sm font-medium">Descricao</label>
           <input
+            {...register('description', { required: true })}
+            type="text"
+            className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
+          />
+        </div>
+        <div>
+          <label className="block text-sm font-medium">Preço</label>
+          <input
+            {...register('price', { required: true })}
             type="number"
             step="0.01"
-            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
-            {...register('price', { required: true })}
+            className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
           />
         </div>
         <div>
-          <label className="block text-gray-700">Quantidade em estoque</label>
+          <label className="block text-sm font-medium">Quantidade em estoque</label>
           <input
-            type="number"
-            className="mt-1 p-2 border border-gray-300 rounded-md w-full"
             {...register('stock', { required: true })}
+            type="number"
+            className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
           />
         </div>
         <div>
-          <label className="block text-gray-700">Completo</label>
+          <label className="block text-sm font-medium">URL (link) da imagem</label>
           <input
-            type="checkbox"
-            className="mt-1"
-            {...register('completed')}
+            {...register('image', { required: true })}
+            type="text"
+            className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
           />
         </div>
-        <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded-md">
-          Adicionar produto
-        </button>
+        <div>
+          <button
+            type="submit"
+            className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 transition"
+          >
+            Adicionar produto
+          </button>
+        </div>
       </form>
     </div>
   );
