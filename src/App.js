@@ -1,46 +1,28 @@
-// src/App.js
-import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { Navbar, Nav } from 'react-bootstrap';
-import Home from './pages/Home';
-import Admin from './pages/Admin';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import ProductList from './components/ProductList';
+import ProductForm from './components/ProductForm';
 import api from './services/api';
-import './styles/App.css';
 
 const App = () => {
-  const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const data = await api.getProducts();
-        setProducts(data);
-      } catch (error) {
-        console.error('Erro ao buscar produtos:', error);
-      }
-    };
-    fetchProducts();
-  }, []);
+  const handleAddProduct = async (data) => {
+    try {
+      await api.addProduct(data);
+      alert('Producto adicionado com sucesso');
+    } catch (error) {
+      console.error('Erro ao adicionar produto:', error);
+      alert('Falha ao adicionar produto');
+    }
+  };
 
   return (
     <Router>
-      <div>
-        <Navbar bg="light" expand="lg">
-          <Navbar.Brand as={Link} to="/">Milka 013</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">
-              <Nav.Link as={Link} to="/">Inicio</Nav.Link>
-              <Nav.Link as={Link} to="/admin">Admin</Nav.Link>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
-
-        <Routes>
-          <Route path="/" element={<Home products={products} />} />
-          <Route path="/admin" element={<Admin />} />
-        </Routes>
-      </div>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<ProductList />} />
+        <Route path="/adicionar-produto" element={<ProductForm onSubmit={handleAddProduct} />} />
+      </Routes>
     </Router>
   );
 };
