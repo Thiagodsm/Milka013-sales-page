@@ -1,19 +1,35 @@
 // src/services/api.js
-import axios from 'axios';
 
-const API_URL = 'https://jsonplaceholder.typicode.com'; // URL da API de teste
+// Defina um objeto ou funções aqui
+const api = {
+  async getProducts() {
+    try {
+      const response = await fetch('https://jsonplaceholder.typicode.com/todos');
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Failed to fetch products:', error);
+      throw error;
+    }
+  },
 
-const getProducts = async () => {
-  try {
-    const response = await axios.get(`${API_URL}/todos`);
-    console.log('Response data:', response.data); // Log para verificar a resposta
-    return response.data; // Retorna a lista de produtos
-  } catch (error) {
-    console.error('Erro ao buscar produtos:', error);
-    throw error;
+  async getProductById(id) {
+    try {
+      const response = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Failed to fetch product by ID:', error);
+      throw error;
+    }
   }
 };
 
-export default {
-  getProducts,
-};
+// Exporte o objeto como padrão
+export default api;
