@@ -26,11 +26,11 @@ const App = () => {
     <Router>
       <div>
         <Navbar bg="light" expand="lg">
-          <Navbar.Brand as={Link} to="/">Milka Chocolate Sales</Navbar.Brand>
+          <Navbar.Brand as={Link} to="/">Milka 013</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link as={Link} to="/">Home</Nav.Link>
+              <Nav.Link as={Link} to="/">Inicio</Nav.Link>
               <Nav.Link as={Link} to="/admin">Admin</Nav.Link>
             </Nav>
           </Navbar.Collapse>

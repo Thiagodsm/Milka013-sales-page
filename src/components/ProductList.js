@@ -8,7 +8,7 @@ const ProductList = ({ products }) => {
     <div className="d-flex flex-wrap">
       {products.map((product) => (
         <Card key={product.id} style={{ width: '18rem', margin: '10px' }}>
-          <Card.Img variant="top" src="https://via.placeholder.com/150" alt="Produto" /> {/* Placeholder image */}
+          <Card.Img variant="top" src="https://picsum.photos/200" alt="Produto" /> {/* Placeholder image */}
           <Card.Body>
             <Card.Title>{product.title}</Card.Title>
             <Card.Text>ID do Usuário: {product.userId}</Card.Text>
